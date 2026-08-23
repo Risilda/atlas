@@ -1,10 +1,10 @@
 /* Atlas Labs service worker — offline-first for the world's most deployed human */
-const CACHE = 'atlas-v2.1';
+const CACHE = 'atlas-v2.3';
 const ASSETS = [
   './', './index.html', './manifest.json', './assets/favicon.svg', './assets/og.jpg',
-  './originals/IMG_3609_o.jpg','./originals/IMG_5025_o.jpg','./originals/IMG_5287_o.jpg',
-  './originals/IMG_5969_o.jpg','./originals/IMG_6880_o.jpg','./originals/IMG_7682_o.jpg',
-  './originals/photo_from_heic_o.jpg','./originals/photo_from_png_o.jpg'
+  './assets/originals/IMG_3609_o.jpg','./assets/originals/IMG_5025_o.jpg','./assets/originals/IMG_5287_o.jpg',
+  './assets/originals/IMG_5969_o.jpg','./assets/originals/IMG_6880_o.jpg','./assets/originals/IMG_7682_o.jpg',
+  './assets/originals/photo_from_heic_o.jpg','./assets/originals/photo_from_png_o.jpg'
 ];
 
 self.addEventListener('install', e => {
