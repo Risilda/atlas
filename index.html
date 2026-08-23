@@ -196,6 +196,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
 </head>
 <body>
 
+<a href="#main" class="mono" style="position:fixed;top:-60px;left:16px;z-index:300;background:var(--acc);color:#160b05;padding:10px 18px;border-radius:0 0 10px 10px;text-decoration:none;font-size:.72rem;letter-spacing:.14em;transition:top .2s" onfocus="this.style.top='0'" onblur="this.style.top='-60px'">skip to content</a>
 <div class="grain" aria-hidden="true"></div>
 <div id="rail"></div>
 
@@ -206,7 +207,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
   </div>
 </header>
 
-<main id="top">
+<main id="top" tabindex="-1">
 
   <!-- ============ HERO ============ -->
   <section class="hero">
@@ -272,13 +273,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
       <div class="sec-head rv"><span class="sec-no">03</span><h2 class="sec-title">Checkpoint releases</h2></div>
       <ul class="tl" id="timeline">
         <!-- NOTE: milestones are typical ages — edit to Atlas's actual log -->
-        <li><span class="tl-ver">v0.00</span><p class="tl-text">Released to production. Immediate adoption by all grandparents.</p></li>
-        <li><span class="tl-ver">v0.02</span><p class="tl-text">First social smile shipped. Parental heart uptime: 100%.</p></li>
-        <li><span class="tl-ver">v0.04</span><p class="tl-text">Rolled over mid-diaper-change. Nobody was ready.</p></li>
-        <li><span class="tl-ver">v0.06</span><p class="tl-text">Stable sitting achieved. Hands freed for supervised chaos.</p></li>
-        <li><span class="tl-ver">v0.08</span><p class="tl-text">Crawling enabled. Every drawer formally deprecated.</p></li>
-        <li><span class="tl-ver">v0.10</span><p class="tl-text">Pull-to-stand deployed. Baby-proofing hotfix within hours.</p></li>
-        <li><span class="tl-ver">v0.11</span><span class="badge">current build</span><p class="tl-text">Babbling with great conviction. First words pending review board (mom &amp; dad).</p></li>
+        <li><span class="tl-ver">v0.00 · Sep 2025</span><p class="tl-text">Released to production. Immediate adoption by all grandparents.</p></li>
+        <li><span class="tl-ver">v0.02 · Nov 2025</span><p class="tl-text">First social smile shipped. Parental heart uptime: 100%.</p></li>
+        <li><span class="tl-ver">v0.04 · Jan 2026</span><p class="tl-text">Rolled over mid-diaper-change. Nobody was ready.</p></li>
+        <li><span class="tl-ver">v0.06 · Mar 2026</span><p class="tl-text">Stable sitting achieved. Hands freed for supervised chaos.</p></li>
+        <li><span class="tl-ver">v0.08 · May 2026</span><p class="tl-text">Crawling enabled. Every drawer formally deprecated.</p></li>
+        <li><span class="tl-ver">v0.10 · Jul 2026</span><p class="tl-text">Pull-to-stand deployed. Baby-proofing hotfix within hours.</p></li>
+        <li><span class="tl-ver">v0.11 · Aug 2026</span><span class="badge">current build</span><p class="tl-text">Babbling with great conviction. First words pending review board (mom &amp; dad).</p></li>
       </ul>
     </div>
   </section>
@@ -325,7 +326,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
   <div class="wrap">
     <span>ATLAS LABS · human-in-chief: Atlas · infrastructure: mom &amp; dad</span>
     <span>no ads · no tracking · no naps were harmed</span>
-    <span>v2.0 · built with love · August 2026</span>
+    <span>v2.3 · built with love · August 2026</span>
   </div>
 </footer>
 
@@ -340,7 +341,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
 (() => {
   const el = document.getElementById('atlasTitle');
   const txt = 'Atlas';
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   el.innerHTML = [...txt].map((c,i)=>`<span class="ch" style="animation-delay:${.15+i*.09}s">${c}</span>`).join('');
 })();
 
