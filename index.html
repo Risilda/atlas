@@ -144,7 +144,8 @@ section.ch{padding:clamp(80px,12vh,150px) 0;position:relative}
 @keyframes rot{to{transform:rotate(360deg)}}
 /* originals film strip */
 .strip{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-flow:dense;gap:12px;margin-top:36px}
-.op{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--card);cursor:pointer}
+.op{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--card);cursor:pointer;padding:0;font:inherit;-webkit-appearance:none;appearance:none;display:block;width:100%;text-align:left}
+.op:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 .op img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s cubic-bezier(.2,.7,.3,1)}
 .op:not(.wide){aspect-ratio:3/4}
 .op.wide{grid-column:span 2;aspect-ratio:4/3}
@@ -191,6 +192,22 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
   *,*::before,*::after{animation-duration:.001s!important;transition:none!important}
   html{scroll-behavior:auto}
   .rv{opacity:1;transform:none}
+}
+/* ---------- print: keepsake edition ---------- */
+@media print{
+  body{background:#fff;color:#111}
+  .grain,#rail,.top,.scroll-cue,.orbits,.rlhf-bar,.lb-x,.skip{display:none!important}
+  .hero{min-height:auto;padding:40px 0}
+  .hero h1,.sec-title,.big-line{color:#111}
+  .uptime{color:#555}.uptime b{color:#B93E1D}
+  section.ch{padding:26pt 0;page-break-inside:avoid}
+  .cell,.bx{background:#faf7f2;border-color:#ddd;break-inside:avoid}
+  .cell dd,.bx p,.mani-body{color:#333}
+  .manifesto{background:#fff!important}
+  .big-line b{color:#B93E1D}
+  .strip{grid-template-columns:repeat(4,1fr)}
+  .op img{filter:saturate(.9)}
+  footer{color:#777}
 }
 </style>
 </head>
@@ -451,9 +468,11 @@ const ORIGINALS = [
 ];
 const strip = document.getElementById('originals');
 ORIGINALS.forEach(g=>{
-  const f=document.createElement('figure');
+  const f=document.createElement('button');
+  f.type='button';
   f.className='op'+(g.fam?' fam':'')+(g.wide?' wide':'');
-  f.innerHTML=`<img src="${g.src}" alt="${g.alt||g.tag}" loading="lazy"><span class="tag">${g.tag}</span>`;
+  f.setAttribute('aria-label', g.alt || g.tag);
+  f.innerHTML=`<img src="${g.src}" alt="" loading="lazy"><span class="tag">${g.tag}</span>`;
   f.addEventListener('click',()=>openLB({...g, fromList:ORIGINALS, caption:(g.fam?'the three of us — ':'original photo · ')+g.tag}));
   strip.appendChild(f);
 });
