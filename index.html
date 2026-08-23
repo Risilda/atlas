@@ -263,22 +263,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
     </div>
   </section>
 
-  <!-- ============ 04 GALLERY ============ -->
+  <!-- ============ 04 SOURCE MATERIAL ============ -->
   <section class="ch">
     <div class="wrap">
       <div class="gal-head rv">
-        <div class="sec-head" style="margin:0"><span class="sec-no">04</span><h2 class="sec-title">Fine-tuning set</h2></div>
-        <span class="kicker">the humans behind the compute — AI renditions</span>
-      </div>
-      <div class="gal" id="gallery"><!-- JS fills this --></div>
-    </div>
-  </section>
-
-  <!-- ============ 04b ORIGINALS FILM STRIP ============ -->
-  <section class="ch">
-    <div class="wrap">
-      <div class="gal-head rv">
-        <div class="sec-head" style="margin:0"><span class="sec-no">04·5</span><h2 class="sec-title">Source material</h2></div>
+        <div class="sec-head" style="margin:0"><span class="sec-no">04</span><h2 class="sec-title">Source material</h2></div>
         <span class="kicker">the real ones — unedited, straight from mom &amp; dad</span>
       </div>
       <div class="strip rv" id="originals"><!-- JS fills --></div>
@@ -366,36 +355,7 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
   addEventListener('scroll', upd, {passive:true}); upd();
 })();
 
-/* ---------- gallery ---------- */
-const GALLERY = [
-  {src:'assets/ai/IMG_6953_oil_web.jpg',        full:'assets/ai/IMG_6953_oil.png',        tag:'oil · june 2026',      caption:'Father\'s Day trio — classical oil'},
-  {src:'assets/ai/IMG_6567_2_oil_web.jpg',     full:'assets/ai/IMG_6567_2_oil.png',     tag:'oil · june 2026',      caption:'The whole family gathered'},
-  {src:'assets/ai/IMG_8498_2_water_web.jpg',   full:'assets/ai/IMG_8498_2_water.png',   tag:'watercolor · aug 2026'},
-  {src:'assets/ai/IMG_8146_2_gouache_web.jpg', full:'assets/ai/IMG_8146_2_gouache.png', tag:'gouache · aug 2026'},
-  {src:'assets/ai/IMG_7317_2_oil_web.jpg',     full:'assets/ai/IMG_7317_2_oil.png',     tag:'oil · may 2025'},
-  {src:'assets/ai/IMG_7003_2_water_web.jpg',   full:'assets/ai/IMG_7003_2_water.png',   tag:'watercolor · june 2026'},
-  {src:'assets/ai/IMG_6762_2_gouache_web.jpg', full:'assets/ai/IMG_6762_2_gouache.png', tag:'gouache · june 2026'},
-  {src:'assets/ai/IMG_6538_2_oil_web.jpg',     full:'assets/ai/IMG_6538_2_oil.png',     tag:'oil · april 2025'},
-  {src:'assets/ai/IMG_6437_2_water_web.jpg',   full:'assets/ai/IMG_6437_2_water.png',   tag:'watercolor · april 2025'},
-  {src:'assets/ai/IMG_6408_2_gouache_web.jpg', full:'assets/ai/IMG_6408_2_gouache.png', tag:'gouache · june 2026'},
-  {src:'assets/ai/IMG_2279_2_oil_web.jpg',     full:'assets/ai/IMG_2279_2_oil.png',     tag:'oil · january 2026'},
-  {src:'assets/ai/666637982_10237085108560345_893848178582_water_web.jpg', full:'assets/ai/666637982_10237085108560345_893848178582_water.png', tag:'watercolor · family archive'},
-];
-const gal = document.getElementById('gallery');
-function renderGallery(){
-  const filled = GALLERY.length;
-  for(let i=filled;i<Math.max(filled,6);i++){
-    const d=document.createElement('div');d.className='ph empty';
-    d.innerHTML=`<div><div class="spin"></div><span class="mono">render pending<br>epoch in progress</span></div>`;
-    gal.appendChild(d);
-  }
-  GALLERY.forEach(g=>{
-    const f=document.createElement('figure');f.className='ph';
-    f.innerHTML=`<img src="${g.src}" alt="${g.tag}" loading="lazy"><span class="tag">${g.tag}</span>`;
-    f.addEventListener('click',()=>openLB(g));
-    gal.prepend(f);
-  });
-}
+/* ---------- lightbox ---------- */
 function openLB(g){
   const lb=document.getElementById('lightbox');
   lb.querySelector('img').src=g.full||g.src;
@@ -406,7 +366,6 @@ document.getElementById('lightbox').addEventListener('click',e=>{
   if(e.target.classList.contains('lightbox')||e.target.classList.contains('lb-x')) e.currentTarget.classList.remove('open');
 });
 addEventListener('keydown',e=>{ if(e.key==='Escape') document.getElementById('lightbox').classList.remove('open'); });
-renderGallery();
 
 /* ---------- originals ---------- */
 const ORIGINALS = [
