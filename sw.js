@@ -1,5 +1,5 @@
 /* Atlas Labs service worker — offline-first for the world's most deployed human */
-const CACHE = 'atlas-v2.3';
+const CACHE = 'atlas-v2.4';
 const ASSETS = [
   './', './index.html', './manifest.json', './assets/favicon.svg', './assets/og.jpg',
   './assets/originals/IMG_3609_o.jpg','./assets/originals/IMG_5025_o.jpg','./assets/originals/IMG_5287_o.jpg',
@@ -20,6 +20,19 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+  // HTML: network-first so content updates land immediately; cache only offline fallback
+  if (e.request.mode === 'navigate' || (e.request.headers.get('accept') || '').includes('text/html')) {
+    e.respondWith(
+      fetch(e.request).then(r => {
+        if (r.ok) {
+          const copy = r.clone();
+          caches.open(CACHE).then(c => c.put(e.request, copy));
+        }
+        return r;
+      }).catch(() => caches.match(e.request))
+    );
+    return;
+  }
   // Google Fonts: stale-while-revalidate
   if (/fonts\.(googleapis|gstatic)\.com/.test(e.request.url)) {
     e.respondWith(
